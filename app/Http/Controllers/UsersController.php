@@ -7,6 +7,8 @@ use App\User;
 use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\Hash;
+use function MongoDB\BSON\toJSON;
+use PhpParser\Node\Expr\Array_;
 
 class UsersController extends Controller
 {
@@ -36,8 +38,8 @@ class UsersController extends Controller
     {
         if (Auth::attempt(['email' => $request['email'],'password'=>$request['password']])) {
             $user = $this->user->byEmail($request['email']);
-            return json_encode(['user' => $user, 'status' => true]);
+            return json_encode(['user' => $user, 'status' => "success"]);
         }
-        return json_encode(['user' => null, 'status' => false]);
+        return json_encode(['user' => null, 'status' => "fail"]);
     }
 }

@@ -42,6 +42,11 @@ class User extends Authenticatable
         return $this->collects()->toggle($newsId);
     }
 
+    //用户收藏了改新闻
+    public function isCollected($newsId)
+    {
+        return $this->collects()->where('new_id',$newsId)->count();
+    }
     /**
      * The attributes that should be hidden for arrays.
      *
