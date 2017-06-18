@@ -6,9 +6,6 @@ use App\Repositories\UserRepository;
 use App\User;
 use Illuminate\Http\Request;
 use Auth;
-use Illuminate\Support\Facades\Hash;
-use function MongoDB\BSON\toJSON;
-use PhpParser\Node\Expr\Array_;
 
 class UsersController extends Controller
 {

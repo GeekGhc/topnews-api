@@ -16,7 +16,7 @@ class CreateCollectsTable extends Migration
         Schema::create('collects', function (Blueprint $table) {
             $table->increments('id');//收藏列表id
             $table->integer('user_id')->unsigned()->index();//用户id
-            $table->integer('new_id')->unsigned()->index();//新闻id
+            $table->integer('news_id')->unsigned()->index();//新闻id
             $table->timestamps();
         });
     }

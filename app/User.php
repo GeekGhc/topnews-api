@@ -34,7 +34,7 @@ class User extends Authenticatable
     //用户----新闻
     public function collects()
     {
-        return $this->belongsToMany(News::class)->withTimestamps();
+        return $this->belongsToMany(News::class,'collects')->withTimestamps();
     }
     //用户收藏该新闻
     public function collectThis($newsId)
@@ -45,7 +45,7 @@ class User extends Authenticatable
     //用户收藏了改新闻
     public function isCollected($newsId)
     {
-        return $this->collects()->where('new_id',$newsId)->count();
+        return $this->collects()->where('news_id',$newsId)->count();
     }
     /**
      * The attributes that should be hidden for arrays.
