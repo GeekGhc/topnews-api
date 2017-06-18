@@ -24,6 +24,10 @@ Route::group(['middleware'=>'api','prefix'=>'v1'],function (){
     Route::post('/news/collect','CollectController@collect');//用户收藏一篇新闻
     Route::post('/user/news','CollectController@isCollect');//用户是否收藏一篇新闻
 
+
+    Route::get('/user/{userId}/news',"UsersController@collectList");//用户的收藏列表
+    Route::get('/user/{userId}',"UsersController@getUser");//返回一个用户的信息
+
     Route::post('/comment','CommentController@store');//用户评论一个新闻
     Route::get('/new/{newId}/comments','NewsController@getComments');//一篇新闻的所有评论
 });

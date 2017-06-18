@@ -39,4 +39,16 @@ class UsersController extends Controller
         }
         return json_encode(['user' => null, 'status' => "fail"]);
     }
+
+    //用户的收藏列表
+    public function collectList($userId)
+    {
+
+    }
+
+    //用户的个人信息
+    public function getUser($userId)
+    {
+
+    }
 }
