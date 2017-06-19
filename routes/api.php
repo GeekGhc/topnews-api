@@ -20,10 +20,11 @@ Route::middleware('api')->get('/user', function (Request $request) {
 Route::group(['middleware'=>'api','prefix'=>'v1'],function (){
     Route::post('/user/register','UsersController@register');//用户注册
     Route::post('/user/login','UsersController@login');//用户登录
+    Route::post('/user/info',"UsersController@updateInfo");//更新一个用户资料
+    Route::post('/user/password',"UsersController@updatePwd");//修改用户密码
 
     Route::post('/news/collect','CollectController@collect');//用户收藏一篇新闻
     Route::post('/user/news','CollectController@isCollect');//用户是否收藏一篇新闻
-
 
     Route::get('/user/{userId}/news',"UsersController@collectList");//用户的收藏列表
     Route::get('/user/{userId}',"UsersController@getUser");//返回一个用户的信息

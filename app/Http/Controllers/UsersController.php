@@ -49,6 +49,34 @@ class UsersController extends Controller
     //用户的个人信息
     public function getUser($userId)
     {
+        $user = $this->user->byId($userId);
+        return json_encode(['user' => $user, 'status' => "success"]);
+    }
 
+    //更新用户信息
+    public function updateInfo(Request $request)
+    {
+        $data = [
+            'name'=>$request['name'],
+            'phone'=>$request['phone'],
+            'desc'=>$request['desc']
+        ];
+        $user = $this->user->byId($request["userId"]);
+        $res  = $user->update($data);
+        if($res){
+            return json_encode(['user' => $user, 'status' => "success"]);
+        }
+        return json_encode(['user' => null, 'status' => "fail"]);
+    }
+
+    //修改用户密码
+    public function updatePwd(Request $request)
+    {
+        $user = $this->user->byId($request["userId"]);
+        $res  = $user->update(['password'=>$request['password']]);
+        if($res){
+            return json_encode(['user' => $user, 'status' => "success"]);
+        }
+        return json_encode(['user' => null, 'status' => "fail"]);
     }
 }
