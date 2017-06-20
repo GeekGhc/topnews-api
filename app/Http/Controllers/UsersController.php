@@ -20,7 +20,7 @@ class UsersController extends Controller
     //用户登录
     public function register(Request $request)
     {
-       $user = User::create([
+        $user = User::create([
             'name' => $request['name'],
             'email' => $request['email'],
             'avatar' => '/images/avatars/elliot.jpg',
@@ -33,7 +33,7 @@ class UsersController extends Controller
     //用户登录
     public function login(Request $request)
     {
-        if (Auth::attempt(['email' => $request['email'],'password'=>$request['password']])) {
+        if (Auth::attempt(['email' => $request['email'], 'password' => $request['password']])) {
             $user = $this->user->byEmail($request['email']);
             return json_encode(['user' => $user, 'status' => "success"]);
         }
@@ -50,31 +50,33 @@ class UsersController extends Controller
     public function getUser($userId)
     {
         $user = $this->user->byId($userId);
-        return json_encode(['user' => $user, 'status' => "success"]);
+        if ($user) {
+            return json_encode(['user' => $user, 'status' => "success"]);
+        }
+        return json_encode(['user' => null, 'status' => "failed"]);
     }
 
     //更新用户信息
     public function updateInfo(Request $request)
     {
-        $data = [
-            'name'=>$request['name'],
-            'phone'=>$request['phone'],
-            'desc'=>$request['desc']
-        ];
         $user = $this->user->byId($request["userId"]);
-        $res  = $user->update($data);
-        if($res){
+        $user->phone = $request['phone'];
+        $user->desc = $request['desc'];
+        $user->name = $request['name'];
+        $res = $user->save();
+        if ($res) {
             return json_encode(['user' => $user, 'status' => "success"]);
         }
-        return json_encode(['user' => null, 'status' => "fail"]);
+        return json_encode(['user' => null, 'status' => "failed"]);
     }
 
     //修改用户密码
     public function updatePwd(Request $request)
     {
         $user = $this->user->byId($request["userId"]);
-        $res  = $user->update(['password'=>$request['password']]);
-        if($res){
+        $user->password = $request['password'];
+        $res = $user->save();
+        if ($res) {
             return json_encode(['user' => $user, 'status' => "success"]);
         }
         return json_encode(['user' => null, 'status' => "fail"]);
