@@ -43,7 +43,12 @@ class UsersController extends Controller
     //用户的收藏列表
     public function collectList($userId)
     {
-
+        $user = $this->user->byId($userId);
+        $newsList = $user->collects;
+        if ($user) {
+            return json_encode(['newsList' => $newsList, 'status' => 'success']);
+        }
+        return json_encode(['newsList' => null, 'status' => "failed"]);
     }
 
     //用户的个人信息
