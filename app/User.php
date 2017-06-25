@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','avatar','phone','desc'
+        'name', 'email', 'password','avatar','phone','desc','social_id','social_type'
     ];
 
     //在数据保存到数据库之前会对密码进行一个预处理

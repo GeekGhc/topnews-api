@@ -20,6 +20,7 @@ Route::middleware('api')->get('/user', function (Request $request) {
 Route::group(['middleware'=>'api','prefix'=>'v1'],function (){
     Route::post('/user/register','UsersController@register');//用户注册
     Route::post('/user/login','UsersController@login');//用户登录
+    Route::post('/user/socialLogin','UsersController@socialLogin');//用户第三方登录
 
     Route::post('/user/info',"UsersController@updateInfo");//更新一个用户资料
     Route::post('/user/password',"UsersController@updatePwd");//修改用户密码

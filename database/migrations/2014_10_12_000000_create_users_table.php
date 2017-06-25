@@ -21,6 +21,8 @@ class CreateUsersTable extends Migration
             $table->text('desc')->nullable();//用户说明
             $table->string('email')->unique();//用户邮箱
             $table->string('phone')->nullable();//用户手机
+            $table->string('social_id')->nullable();//第三方登录id
+            $table->string('social_type')->nullable();//第三方登录类型
             $table->rememberToken();
             $table->timestamps();
         });
